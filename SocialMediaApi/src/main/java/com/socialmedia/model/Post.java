@@ -32,17 +32,17 @@ import lombok.NoArgsConstructor;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne // (fetch = FetchType.)// optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
     
-    @NotBlank
-    @Size(max = 300)
+    @NotBlank  
+    @Size(min = 1, max = 300, message = "content should be between 1 - 300 characters")
     private String content;
     
     @Column(name = "created_at", nullable = false, updatable = false)
